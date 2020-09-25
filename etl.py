@@ -14,6 +14,7 @@ class Etl:
         self.database = database
         self.lmt_table_name = lmt_table_name
         self.pmt_table_name = pmt_table_name
+        self.concat_json_file = 'concat_json_file.json.gz'
         
     def end_to_end(self):
         import utils
@@ -21,7 +22,7 @@ class Etl:
                     aws_secret_access_key= self.aws_secret_access_key,region_name = self.region_name,
                                  bucket_name = self.bucket_name, s3_folder= self.s3_folder, local_dir = self.local_dir)
         print("Concatenating json files")
-        concat_df = utils.concat_json_files(self.local_dir)
+        concat_df = utils.json_concat(self.concat_json_file, self.local_dir )
         print("Concatenation done")
         
         
