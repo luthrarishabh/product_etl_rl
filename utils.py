@@ -58,7 +58,8 @@ def json_concat(output_json_file, folder ):
     folder: folder name containing multiple json files
     """
     head = []
-    os.remove(folder + '/' + output_json_file)
+    if os.path.exists(folder + '/' + output_json_file):
+        os.remove(folder + '/' + output_json_file)
     
     for f in [folder + '/' + f for f in os.listdir(folder) if 'json.gz' in f] :
         with gzip.GzipFile(f, 'r') as fin:    

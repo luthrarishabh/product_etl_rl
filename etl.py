@@ -18,13 +18,14 @@ class Etl:
         
     def end_to_end(self):
         import utils
+        import pandas as pd
         utils.download_s3_folder(aws_access_key_id=self.aws_access_key_id,
                     aws_secret_access_key= self.aws_secret_access_key,region_name = self.region_name,
                                  bucket_name = self.bucket_name, s3_folder= self.s3_folder, local_dir = self.local_dir)
         print("Concatenating json files")
         concat_df = utils.json_concat(self.concat_json_file, self.local_dir )
         print("Concatenation done")
-        
+        print(concat_df.shape)
         
         print("Creating a Landing table in MySQL ")
         
@@ -34,7 +35,7 @@ class Etl:
         
         print("Cleaning data")
         preprocessed_df = utils.preprocess(concat_df)
-        
+        print(preprocessed_df.shape)        
         print("Creating a Serving table in MySQL")
         utils.df_to_table(dbConnection,self.pmt_table_name,preprocessed_df)
 
