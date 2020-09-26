@@ -19,6 +19,7 @@ or
 curl "https://flask-product-etl.herokuapp.com/?upc=10000001317500&store_number=1001"
 
 Please note that since it's a get request, it may be blocked by the organization's firewall
+**While using curl, please put the url in double quotes**
 
 
 ## Output
